@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
 	private bool gameOver; // is it over?
 	public bool GameOver { get { return gameOver; } }
 	public void WinGame() { win = true; gameOver = true; } // Creates the winstate
+    private Player player;
+    
 
 	// s_Instance is used to cache the instance found in the scene so we don't have to look it up every time.
 	private static GameManager s_Instance = null;
@@ -42,12 +44,20 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		win = false;
 		isPaused = false;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+            player.MoveLeft();
+
+        if (Input.GetKeyUp(KeyCode.RightArrow))
+            player.MoveRight();
+
+        if (Input.GetKeyUp(KeyCode.Space))
+            player.toggleSplit();
+    }
 
 	/// <summary>
 	/// Pause the game.
@@ -64,5 +74,4 @@ public class GameManager : MonoBehaviour {
 		isPaused = false;
 		GameObject.Find ("btnPause").GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("btnPause");
 	}
-
 }
