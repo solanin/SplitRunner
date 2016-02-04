@@ -108,6 +108,6 @@ public class Player : MonoBehaviour {
 
     public float GetXPosition()
     {
-        return paths[position];
-    }
+		return paths [position];
+	}
 }

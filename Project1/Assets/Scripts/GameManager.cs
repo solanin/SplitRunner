@@ -49,14 +49,16 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-            player.MoveLeft();
+		if (!isPaused) {
+			if (Input.GetKeyUp (KeyCode.LeftArrow))
+				player.MoveLeft ();
 
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-            player.MoveRight();
+			if (Input.GetKeyUp (KeyCode.RightArrow))
+				player.MoveRight ();
 
-        if (Input.GetKeyUp(KeyCode.Space))
-            player.toggleSplit();
+			if (Input.GetKeyUp (KeyCode.Space))
+				player.toggleSplit ();
+		}
     }
 
 	/// <summary>
@@ -65,6 +67,9 @@ public class GameManager : MonoBehaviour {
 	public void Pause () {
 		isPaused = true;
 		GameObject.Find ("btnPause").GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("btnPlay");
+	
+		GameObject.Find ("Paused").GetComponent<Renderer> ().enabled = true;
+		GameObject.Find ("Menu").GetComponent<Renderer> ().enabled = true;
 	}
 
 	/// <summary>
@@ -73,5 +78,8 @@ public class GameManager : MonoBehaviour {
 	public void Play () {
 		isPaused = false;
 		GameObject.Find ("btnPause").GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("btnPause");
+
+		GameObject.Find ("Paused").GetComponent<Renderer> ().enabled = false;
+		GameObject.Find ("Menu").GetComponent<Renderer> ().enabled = false;
 	}
 }
