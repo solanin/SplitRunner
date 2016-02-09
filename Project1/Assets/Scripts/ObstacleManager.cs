@@ -3,8 +3,8 @@ using System.Collections;
 
 public class ObstacleManager : MonoBehaviour {
     [SerializeField] Object[] Obstacles = new Object[30];
-    GameObject[] ActiveBlockades = new GameObject[30];
-    int objectCount = 0;
+	public GameObject[] ActiveBlockades = new GameObject[30];
+    public int objectCount = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -15,13 +15,13 @@ public class ObstacleManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        for (int i = 0; i < Obstacles.Length; i++)
+		for (int i = 0; i < Obstacles.Length; i++)
         {
-            GameObject temp = (GameObject)Obstacles[i];
-            if (temp.transform.position.y < -5.0f)
+			GameObject temp = (GameObject) Obstacles[i];
+			if (temp.transform.position.y < -5.0f)
             {
-                DestroyObject(Obstacles[i]);
-                Obstacles[i] = null;
+				DestroyObject(Obstacles[i]);
+				Obstacles[i] = null;
                 print(i);
                 objectCount--;
             }
