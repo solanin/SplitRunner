@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 	public bool GameOver { get { return gameOver; } }
 	public void WinGame() { win = true; gameOver = true; } // Creates the winstate
     private Player player;
+    private ObstacleManager OM;
     
 
 	// s_Instance is used to cache the instance found in the scene so we don't have to look it up every time.
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour {
 		win = false;
 		isPaused = false;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        OM = new ObstacleManager();
 	}
 	
 	// Update is called once per frame
