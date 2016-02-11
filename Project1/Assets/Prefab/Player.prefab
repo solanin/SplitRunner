@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3379218}
   - 135: {fileID: 13543706}
   - 23: {fileID: 2337582}
+  - 114: {fileID: 11401458}
   m_Layer: 0
   m_Name: PlayerSmallRight
   m_TagString: PlayerSmallRight
@@ -29,6 +30,7 @@ GameObject:
   - 33: {fileID: 3382542}
   - 135: {fileID: 13545000}
   - 23: {fileID: 2333582}
+  - 114: {fileID: 11465190}
   m_Layer: 0
   m_Name: PlayerBig
   m_TagString: PlayerBig
@@ -63,6 +65,7 @@ GameObject:
   - 33: {fileID: 3341926}
   - 135: {fileID: 13522462}
   - 23: {fileID: 2316742}
+  - 114: {fileID: 11465822}
   m_Layer: 0
   m_Name: PlayerSmallLeft
   m_TagString: PlayerSmall
@@ -214,6 +217,39 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114506}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &11401458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a081893cc057299419ad906647848d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11465190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ba2d6e59f61532428fdfedba2a85b80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11465822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a081893cc057299419ad906647848d0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11497318
 MonoBehaviour:
   m_ObjectHideFlags: 1

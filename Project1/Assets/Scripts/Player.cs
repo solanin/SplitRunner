@@ -4,6 +4,7 @@ using System.Collections;
 public class Player : MonoBehaviour {
 
     private bool split;
+	public bool isSplit() { return split; }
     private GameObject smallLeft;
     private GameObject smallRight;
     private GameObject bigCenter;
@@ -38,15 +39,6 @@ public class Player : MonoBehaviour {
 	void Update () {
 	
     }
-
-	void OnTriggerEnter (Collider col) {
-		Debug.Log ("Player hit something");
-
-		if(col.gameObject.tag == "Obstacle")
-		{
-			gm.EndGame();
-		}
-	}
 
     public void toggleSplit()
     {
