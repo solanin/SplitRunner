@@ -10,6 +10,7 @@ TagManager:
   - PlayerSmall
   - Obstacle
   - Blockade
+  - Score
   layers:
   - Default
   - TransparentFX
