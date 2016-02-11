@@ -11,8 +11,12 @@ public class Player : MonoBehaviour {
     private float[] paths = { -3.0f, -1.5f, 0.0f, 1.5f, 3.0f }; //position of the paths
     private int position;
 
+	private GameManager gm;
+
     // Use this for initialization
     void Start () {
+		gm = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+
         split = false;
 
         //get all the separate game objects
@@ -32,8 +36,17 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+	
     }
+
+	void OnTriggerEnter (Collider col) {
+		Debug.Log ("Player hit something");
+
+		if(col.gameObject.tag == "Obstacle")
+		{
+			gm.EndGame();
+		}
+	}
 
     public void toggleSplit()
     {

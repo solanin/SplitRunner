@@ -6,10 +6,9 @@ public class GameManager : MonoBehaviour {
 	//Gamestate
 	private bool isPaused;
 	public bool IsPaused { get { return isPaused; } }
-	private bool win; // have you won the game?
 	private bool gameOver; // is it over?
 	public bool GameOver { get { return gameOver; } }
-	public void WinGame() { win = true; gameOver = true; } // Creates the winstate
+	public void EndGame() { gameOver = true; } // Creates the end state
     private Player player;
     private ObstacleManager OM;
     
@@ -43,7 +42,7 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		win = false;
+		gameOver = false;
 		isPaused = false;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         OM = new ObstacleManager();
@@ -61,6 +60,10 @@ public class GameManager : MonoBehaviour {
 			if (Input.GetKeyUp (KeyCode.Space))
 				player.toggleSplit ();
 		}
+
+		if (GameOver) {
+			Pause();
+		}
     }
 
 	/// <summary>
@@ -72,6 +75,13 @@ public class GameManager : MonoBehaviour {
 	
 		GameObject.Find ("Paused").GetComponent<Renderer> ().enabled = true;
 		GameObject.Find ("Menu").GetComponent<Renderer> ().enabled = true;
+
+		if (GameOver) {
+			GameObject.Find ("btnPause").GetComponent<SpriteRenderer> ().enabled = false;
+			GameObject.Find ("btnReplay").GetComponent<SpriteRenderer> ().enabled = true;
+			GameObject.Find ("btnReplay").GetComponent<BoxCollider2D> ().enabled = true;
+			GameObject.Find ("Paused").GetComponent<TextMesh> ().text = "Game\nOver";
+		}
 	}
 
 	/// <summary>

@@ -2,9 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Obstacle.cs">
     <Files>
-      <File FileName="Assets\Scripts\Obstacle.cs" Line="3" Column="1" />
-      <File FileName="Assets\Scripts\GameManager.cs" Line="71" Column="78" />
-      <File FileName="Assets\Scripts\ObstacleManager.cs" Line="7" Column="32" />
+      <File FileName="Assets\Scripts\Player.cs" Line="42" Column="2" />
+      <File FileName="Assets\Scripts\Obstacle.cs" Line="22" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
