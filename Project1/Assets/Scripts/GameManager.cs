@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
 	public void EndGame() { gameOver = true; } // Creates the end state
     private Player player;
     private ObstacleManager OM;
+    private GameObject scoreText;
+    private float score;
     
 
 	// s_Instance is used to cache the instance found in the scene so we don't have to look it up every time.
@@ -46,6 +48,8 @@ public class GameManager : MonoBehaviour {
 		isPaused = false;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         OM = new ObstacleManager();
+        scoreText = GameObject.FindGameObjectWithTag("Score");
+        score = 0;
 	}
 	
 	// Update is called once per frame
@@ -59,7 +63,11 @@ public class GameManager : MonoBehaviour {
 
 			if (Input.GetKeyUp (KeyCode.Space))
 				player.toggleSplit ();
-		}
+
+            score += Time.deltaTime;
+            scoreText.GetComponentInChildren<TextMesh>().text = "Score: " + score.ToString("0.##");
+
+        }
 
 		if (GameOver) {
 			Pause();
