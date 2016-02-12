@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Obstacle : MonoBehaviour {
 
-	private float speed = 0.01f;
+    //TODO: Make Getter/Setter
+	public float speed = 0.01f; //Need access to this variable so that we can increase/decrease difficulty
 
 	private GameManager gm;
 
@@ -19,5 +20,10 @@ public class Obstacle : MonoBehaviour {
 			float newy = transform.position.y - speed;
 			transform.position = new Vector3 (transform.position.x, newy, transform.position.z);
 		}
+        if (transform.position.y < -6.0f)
+        {
+            Destroy(this.gameObject);
+            
+        }
 	}
 }
