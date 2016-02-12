@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e669fc98d4b6f974e8ecf623b5c1aa72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
 --- !u!4 &660705278
 Transform:
   m_ObjectHideFlags: 0
@@ -296,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb403036db69fcd4da35c3912e0ff47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gm: {fileID: 660705277}
   ActiveBlockades:
   - {fileID: 0}
   - {fileID: 0}
