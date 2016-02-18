@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
     private int path;
     private float[] paths = { -3.0f, -1.5f, 0.0f, 1.5f, 3.0f }; //position of the paths
     private int position;
+    public float speed = 40;
 
 	private GameManager gm;
 
@@ -37,7 +38,27 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    if (transform.position.x != paths[position])
+        {
+            if (transform.position.x < paths[position])
+            {
+                float newPos = transform.position.x + speed * Time.deltaTime;
+                if (newPos > paths[position])
+                {
+                    newPos = paths[position];
+                }
+                transform.position = new Vector3(newPos, -4.0f, 0.0f);
+            }
+            else 
+            {
+                float newPos = transform.position.x - speed * Time.deltaTime;
+                if (newPos < paths[position])
+                {
+                    newPos = paths[position];
+                }
+                transform.position = new Vector3(newPos, -4.0f, 0.0f);
+            }
+        }
     }
 
     public void toggleSplit()
@@ -88,7 +109,7 @@ public class Player : MonoBehaviour {
             }
         }
         
-        transform.position = new Vector3(paths[position], -4.0f, 0.0f);
+        //transform.position = new Vector3(paths[position], -4.0f, 0.0f);
     }
 
     public void MoveRight()
@@ -108,11 +129,11 @@ public class Player : MonoBehaviour {
             }
         }
 
-        transform.position = new Vector3(paths[position], -4.0f, 0.0f);
+        //transform.position = new Vector3(paths[position], -4.0f, 0.0f);
     }
 
     public float GetXPosition()
     {
-		return paths [position];
+		return paths[position];
 	}
 }
