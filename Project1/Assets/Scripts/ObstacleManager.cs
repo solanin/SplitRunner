@@ -2,20 +2,51 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ObstacleManager : MonoBehaviour {
+public class ObstacleManager : MonoBehaviour
+{
     public object[] Obstacles = new object[0];
     public GameManager gm;
     public List<GameObject> ActiveBlockades = new List<GameObject>(0); // Holds All Active Objects on Screen
     public int objectCount = 0; // Current Object on Screen Count
+    //public Dictionary<object, bool[]> emptySpaces = new Dictionary<object, bool[]>(); //dictionary holding the spaces
 
-	// Use this for initialization
-	void Start () {
+    //2d array to hold the positions
+    public bool[,] emptySpaces = new bool[21, 5] { { true, false, true, false, false } ,
+            { true, true, false, true, true } ,
+            { true, false, true, true, true } ,
+            { true, true, true, false, true },
+            { false, true, false, false, false } ,
+            { false, true, false, true, false },
+            { false, true, true, true, false },
+            { false, true, false, true, true },
+            { true, true, false, true, false },
+            { true, true, false, true, true },
+            { true, false, true, true, true },
+            { true, true, true, false, true },
+            { false, true, false, true, false },
+            { false, true, true, true, false },
+            { false, true, false, true, true },
+            { true, true, false, true, false },
+            { false, false, true, false, false },
+            { false, false, true, false, true },
+            { false, false, false, true, false },
+            { false, false, false, false, true },
+            { true, false, false, false, false }
+        };
+    public GameObject collectablePrefab = null;
+    private float[] lanePositions = new float[5] { -3.0f, -1.5f, 0.0f, 1.5f, 3.0f };
+
+    // Use this for initialization
+    void Start()
+    {
         Obstacles = Resources.LoadAll("Obstacles"); // Loads all prefabs in obstacle folder to this array
         GenerateObstacles(4.0f, 10, .05f, 12.0f);// Start initial generation
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+
+    // Update is called once per frame
+    void Update()
+    {
         if (GameObject.FindGameObjectsWithTag("Obstacle").Length < 10)
         {
             if (gm)
@@ -39,18 +70,75 @@ public class ObstacleManager : MonoBehaviour {
                 }
             }
         }
-	}
+    }
 
     //TODO: Create function for block creation
     void GenerateObstacles(float dist, int numObjects, float speed, float start) // For now only going three random numbers deep
     {
         for (int i = 0; i < numObjects; i++) // Go through and make objects
         {
+
             int x = Random.Range(0, Obstacles.Length); //Generate Number for first wall
-			((GameObject)Obstacles[x]).transform.position = new Vector3(0.0f, start);
+            ((GameObject)Obstacles[x]).transform.position = new Vector3(0.0f, start);
             ActiveBlockades.Add((GameObject)Obstacles[x]);
-			GameObject.Instantiate((UnityEngine.Object)Obstacles[x]);
+            GameObject.Instantiate((UnityEngine.Object)Obstacles[x]);
+
+            //Generating collectables
+            int obstacle = Random.Range(0, 5);
+            obstacle = 1;
+            if (obstacle == 1)
+            {
+                Debug.Log("collectable maybe");
+                List<int> emptySpace = new List<int>();
+                for (int j = 0; j < 5; j++)
+                {
+                    if (emptySpaces[x, j])
+                    {
+                        emptySpace.Add(j);
+                    }
+                }
+
+                if (emptySpace.Count == 2)
+                {
+                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[0]], start), Quaternion.identity);
+                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[1]], start), Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
+                    Debug.Log("collectable");
+                }
+                //Instantiate(collectablePrefab, Vector3(xPos, start), Quaternion.identity);
+            }
+
             start += dist; //append to start so that nlocks are spaced
         }
     }
+
+    //void createDictionary()
+    //{
+    //    //emptySpaces.Add(Obstacles[0], new bool[5] { true, false, true, false, false });
+    //    //emptySpaces.Add(Obstacles[1], new bool[5] { true, true, false, true, true });
+    //    //emptySpaces.Add(Obstacles[2], new bool[5] { true, false, true, true, true });
+    //    //emptySpaces.Add(Obstacles[3], new bool[5] { true, true, true, false, true });
+    //    //emptySpaces.Add(Obstacles[4], new bool[5] { false, true, false, false, false });
+    //    //emptySpaces.Add(Obstacles[5], new bool[5] { false, true, false, true, false });
+    //    //emptySpaces.Add(Obstacles[6], new bool[5] { false, true, true, true, false });
+    //    //emptySpaces.Add(Obstacles[7], new bool[5] { false, true, false, true, true });
+    //    //emptySpaces.Add(Obstacles[8], new bool[5] { true, true, false, true, false });
+    //    //emptySpaces.Add(Obstacles[9], new bool[5] { true, true, false, true, true });
+    //    //emptySpaces.Add(Obstacles[10], new bool[5] { true, false, true, true, true });
+    //    //emptySpaces.Add(Obstacles[11], new bool[5] { true, true, true, false, true });
+    //    //emptySpaces.Add(Obstacles[12], new bool[5] { false, true, false, true, false });
+    //    //emptySpaces.Add(Obstacles[13], new bool[5] { false, true, true, true, false });
+    //    //emptySpaces.Add(Obstacles[14], new bool[5] { false, true, false, true, true });
+    //    //emptySpaces.Add(Obstacles[15], new bool[5] { true, true, false, true, false });
+    //    //emptySpaces.Add(Obstacles[16], new bool[5] { false, false, true, false, false });
+    //    //emptySpaces.Add(Obstacles[17], new bool[5] { false, false, true, false, true });
+    //    //emptySpaces.Add(Obstacles[18], new bool[5] { false, false, false, true, false });
+    //    //emptySpaces.Add(Obstacles[19], new bool[5] { false, false, false, false, true });
+    //    //emptySpaces.Add(Obstacles[20], new bool[5] { true, false, false, false, false });
+
+        
+    //}
 }

@@ -331,6 +331,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   objectCount: 0
+  collectablePrefab: {fileID: 129996, guid: e05416f7226e6864fbea8c0bff7a3780, type: 2}
 --- !u!1 &948041554
 GameObject:
   m_ObjectHideFlags: 0

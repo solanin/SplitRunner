@@ -11,6 +11,7 @@ TagManager:
   - Obstacle
   - Blockade
   - Score
+  - Collectable
   layers:
   - Default
   - TransparentFX
