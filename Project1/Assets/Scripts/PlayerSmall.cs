@@ -17,6 +17,11 @@ public class PlayerSmall : MonoBehaviour {
 			if (col.gameObject.tag == "Obstacle") {
 				gm.EndGame ();
 			}
-		}
+            else if (col.gameObject.tag == "Collectable")
+            {
+                gm.addScore();
+                Destroy(col.gameObject);
+            }
+        }
 	}
 }

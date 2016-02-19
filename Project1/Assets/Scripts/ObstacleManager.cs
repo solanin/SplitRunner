@@ -88,7 +88,6 @@ public class ObstacleManager : MonoBehaviour
             obstacle = 1;
             if (obstacle == 1)
             {
-                Debug.Log("collectable maybe");
                 List<int> emptySpace = new List<int>();
                 for (int j = 0; j < 5; j++)
                 {
@@ -106,9 +105,7 @@ public class ObstacleManager : MonoBehaviour
                 else
                 {
                     Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
-                    Debug.Log("collectable");
                 }
-                //Instantiate(collectablePrefab, Vector3(xPos, start), Quaternion.identity);
             }
 
             start += dist; //append to start so that nlocks are spaced

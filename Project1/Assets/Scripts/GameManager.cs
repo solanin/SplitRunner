@@ -111,4 +111,8 @@ public class GameManager : MonoBehaviour {
     {
         return score;
     }
+    public void addScore()
+    {
+        score++;
+    }
 }
