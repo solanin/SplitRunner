@@ -7,11 +7,14 @@ public class Player : MonoBehaviour {
 	public bool isSplit() { return split; }
     private GameObject smallLeft;
     private GameObject smallRight;
-    private GameObject bigCenter;
+	private GameObject bigCenter;
+	private GameObject smallLeftS;
+	private GameObject smallRightS;
+	private GameObject bigCenterS;
     private int path;
     private float[] paths = { -3.0f, -1.5f, 0.0f, 1.5f, 3.0f }; //position of the paths
     private int position;
-    public float speed = 40;
+    public float speed = 40; // Left right movement
 
 	private GameManager gm;
 
@@ -24,12 +27,18 @@ public class Player : MonoBehaviour {
         //get all the separate game objects
         smallLeft = GameObject.Find("PlayerSmallLeft");
         smallRight = GameObject.Find("PlayerSmallRight");
-        bigCenter = GameObject.Find("PlayerBig");
+		bigCenter = GameObject.Find("PlayerBig");
+		smallLeftS = GameObject.Find("PlayerSmallLeftShaddow");
+		smallRightS = GameObject.Find("PlayerSmallRightShaddow");
+		bigCenterS = GameObject.Find("PlayerBigShaddow");
 
         //set renderers
         smallLeft.GetComponentInChildren<MeshRenderer>().enabled = false;
         smallRight.GetComponentInChildren<MeshRenderer>().enabled = false;
-        bigCenter.GetComponentInChildren<MeshRenderer>().enabled = true;
+		bigCenter.GetComponentInChildren<MeshRenderer>().enabled = true;
+		smallLeftS.GetComponentInChildren<MeshRenderer>().enabled = false;
+		smallRightS.GetComponentInChildren<MeshRenderer>().enabled = false;
+		bigCenterS.GetComponentInChildren<MeshRenderer>().enabled = true;
 
         //set initial position
         position = 2;
@@ -70,7 +79,11 @@ public class Player : MonoBehaviour {
             //set renderers
             smallLeft.GetComponentInChildren<MeshRenderer>().enabled = true;
             smallRight.GetComponentInChildren<MeshRenderer>().enabled = true;
-            bigCenter.GetComponentInChildren<MeshRenderer>().enabled = false;
+			bigCenter.GetComponentInChildren<MeshRenderer>().enabled = false;
+			smallLeftS.GetComponentInChildren<MeshRenderer>().enabled = true;
+			smallRightS.GetComponentInChildren<MeshRenderer>().enabled = true;
+			bigCenterS.GetComponentInChildren<MeshRenderer>().enabled = false;
+
 
             //correct positioning for splitting
             if (position < 2)
@@ -88,7 +101,10 @@ public class Player : MonoBehaviour {
             //set renderers
             smallLeft.GetComponentInChildren<MeshRenderer>().enabled = false;
             smallRight.GetComponentInChildren<MeshRenderer>().enabled = false;
-            bigCenter.GetComponentInChildren<MeshRenderer>().enabled = true;
+			bigCenter.GetComponentInChildren<MeshRenderer>().enabled = true;
+			smallLeftS.GetComponentInChildren<MeshRenderer>().enabled = false;
+			smallRightS.GetComponentInChildren<MeshRenderer>().enabled = false;
+			bigCenterS.GetComponentInChildren<MeshRenderer>().enabled = true;
         }
     }
 
