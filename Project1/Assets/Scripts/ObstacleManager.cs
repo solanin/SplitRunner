@@ -6,6 +6,8 @@ public class ObstacleManager : MonoBehaviour
 {
     public object[] Obstacles = new object[0];
     public GameManager gm;
+    int level = 0;
+    GameObject levelText;
     public List<GameObject> ActiveBlockades = new List<GameObject>(0); // Holds All Active Objects on Screen
     public int objectCount = 0; // Current Object on Screen Count
 
@@ -41,34 +43,22 @@ public class ObstacleManager : MonoBehaviour
     void Start()
     {
         Obstacles = Resources.LoadAll("Obstacles"); // Loads all prefabs in obstacle folder to this array
-        GenerateObstacles(4.0f, 10, .05f, 12.0f);// Start initial generation
+        level = 0;
+        levelText = GameObject.FindWithTag("Level");
+        GenerateObstacles(4.0f, 5, .02f, 12.0f);// Start initial generation
+        
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindGameObjectsWithTag("Obstacle").Length < 10)
+        if (GameObject.FindGameObjectsWithTag("Obstacle").Length < 2)
         {
             if (gm)
             {
                 float time = gm.GetTime();
-                if (time > 150)
-                {
-                    GenerateObstacles(10.0f, 40, .5f, 96.0f);
-                }
-                else if (time > 100)
-                {
-                    GenerateObstacles(8.0f, 30, .3f, 48.0f);
-                }
-                else if (time > 50)
-                {
-                    GenerateObstacles(6.0f, 20, .15f, 24.0f);
-                }
-                else
-                {
-                    GenerateObstacles(4.0f, 10, .05f, 12.0f);
-                }
+                GenerateObstacles(8.0f, 5, time*.05f, 10.0f);
             }
         }
     }
@@ -76,6 +66,10 @@ public class ObstacleManager : MonoBehaviour
     //TODO: Create function for block creation
     void GenerateObstacles(float dist, int numObjects, float speed, float start) // For now only going three random numbers deep
     {
+        level++;
+        levelText.GetComponent<TextMesh>().text = "Level " + level;
+        StopAllCoroutines();
+        StartCoroutine(fadeText(3.0f));
         for (int i = 0; i < numObjects; i++) // Go through and make objects
         {
 
@@ -153,5 +147,15 @@ public class ObstacleManager : MonoBehaviour
             start += dist; //append to start so that nlocks are spaced
         }
     }
-    
+
+    IEnumerator fadeText(float inTime)
+    {
+        Vector3 start = new Vector3(1.0f, 0, 0);
+        for (float t = 0f; t < 1f; t += Time.deltaTime / inTime)
+        {
+            levelText.GetComponent<Renderer>().material.color = new Color(0,0,255, Vector3.Lerp(start, Vector3.zero, t).x);
+            yield return null;
+        }
+    }
+
 }

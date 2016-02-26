@@ -14,6 +14,7 @@ TagManager:
   - Collectable
   - Multiplier
   - Shield
+  - Level
   layers:
   - Default
   - TransparentFX
