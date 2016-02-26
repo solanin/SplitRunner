@@ -14,12 +14,22 @@ public class PlayerSmall : MonoBehaviour {
 	void OnTriggerEnter (Collider col) {
 		if (player.isSplit()) {
 			Debug.Log ("PlayerSmall hit something");
-			if (col.gameObject.tag == "Obstacle") {
+			if (col.gameObject.tag == "Obstacle" && !gm.Shield()) {
 				gm.EndGame ();
 			}
             else if (col.gameObject.tag == "Collectable")
             {
                 gm.addScore();
+                Destroy(col.gameObject);
+            }
+            else if (col.gameObject.tag == "Multiplier")
+            {
+                gm.activateMultiplier();
+                Destroy(col.gameObject);
+            }
+            else if (col.gameObject.tag == "Shield")
+            {
+                gm.activateShield();
                 Destroy(col.gameObject);
             }
         }

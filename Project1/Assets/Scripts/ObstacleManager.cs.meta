@@ -1,12 +1,14 @@
 fileFormatVersion: 2
 guid: fb403036db69fcd4da35c3912e0ff47a
-timeCreated: 1455819716
+timeCreated: 1456447521
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - gm: {instanceID: 0}
   - collectablePrefab: {fileID: 129996, guid: e05416f7226e6864fbea8c0bff7a3780, type: 2}
+  - doubleScorePrefab: {fileID: 185424, guid: 1aa6b7b76c41c7d4ea2bc5f2330495e2, type: 2}
+  - shieldPrefab: {fileID: 181704, guid: bf9fa2e1d163cfa49b051456e1eae8c4, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

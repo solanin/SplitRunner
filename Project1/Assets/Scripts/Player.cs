@@ -11,12 +11,19 @@ public class Player : MonoBehaviour {
 	private GameObject smallLeftS;
 	private GameObject smallRightS;
 	private GameObject bigCenterS;
+    private GameObject bigShield;
+    private GameObject smallLeftShield;
+    private GameObject smallRightShield;
+
     private int path;
     private float[] paths = { -3.0f, -1.5f, 0.0f, 1.5f, 3.0f }; //position of the paths
     private int position;
     public float speed = 40; // Left right movement
 
 	private GameManager gm;
+
+    private bool shieldOn = false;
+    private float shieldFlashTimer = 0.0f;
 
     // Use this for initialization
     void Start () {
@@ -32,6 +39,10 @@ public class Player : MonoBehaviour {
 		smallRightS = GameObject.Find("PlayerSmallRightShaddow");
 		bigCenterS = GameObject.Find("PlayerBigShaddow");
 
+        smallLeftShield = GameObject.Find("PlayerSmallLeftShield");
+        smallRightShield = GameObject.Find("PlayerSmallRightShield");
+        bigShield = GameObject.Find("PlayerBigShield");
+
         //set renderers
         smallLeft.GetComponentInChildren<MeshRenderer>().enabled = false;
         smallRight.GetComponentInChildren<MeshRenderer>().enabled = false;
@@ -39,6 +50,9 @@ public class Player : MonoBehaviour {
 		smallLeftS.GetComponentInChildren<MeshRenderer>().enabled = false;
 		smallRightS.GetComponentInChildren<MeshRenderer>().enabled = false;
 		bigCenterS.GetComponentInChildren<MeshRenderer>().enabled = true;
+        smallLeftShield.GetComponentInChildren<MeshRenderer>().enabled = false;
+        smallRightShield.GetComponentInChildren<MeshRenderer>().enabled = false;
+        bigShield.GetComponentInChildren<MeshRenderer>().enabled = false;
 
         //set initial position
         position = 2;
@@ -84,6 +98,12 @@ public class Player : MonoBehaviour {
 			smallRightS.GetComponentInChildren<MeshRenderer>().enabled = true;
 			bigCenterS.GetComponentInChildren<MeshRenderer>().enabled = false;
 
+            if (gm.Shield())
+            {
+                smallLeftShield.GetComponentInChildren<MeshRenderer>().enabled = true;
+                smallRightShield.GetComponentInChildren<MeshRenderer>().enabled = true;
+                bigShield.GetComponentInChildren<MeshRenderer>().enabled = false;
+            }
 
             //correct positioning for splitting
             if (position < 2)
@@ -105,6 +125,13 @@ public class Player : MonoBehaviour {
 			smallLeftS.GetComponentInChildren<MeshRenderer>().enabled = false;
 			smallRightS.GetComponentInChildren<MeshRenderer>().enabled = false;
 			bigCenterS.GetComponentInChildren<MeshRenderer>().enabled = true;
+
+            if (gm.Shield())
+            {
+                smallLeftShield.GetComponentInChildren<MeshRenderer>().enabled = false;
+                smallRightShield.GetComponentInChildren<MeshRenderer>().enabled = false;
+                bigShield.GetComponentInChildren<MeshRenderer>().enabled = true;
+            }
         }
     }
 
@@ -152,4 +179,50 @@ public class Player : MonoBehaviour {
     {
 		return paths[position];
 	}
+
+    public void TurnOnShield()
+    {
+        if (split)
+        {
+            smallLeftShield.GetComponentInChildren<MeshRenderer>().enabled = true;
+            smallRightShield.GetComponentInChildren<MeshRenderer>().enabled = true;
+        }
+        else
+        {
+            bigShield.GetComponentInChildren<MeshRenderer>().enabled = true;
+        }
+
+        shieldOn = true;
+    }
+    
+    public void TurnOffShield()
+    {
+        smallLeftShield.GetComponentInChildren<MeshRenderer>().enabled = false;
+        smallRightShield.GetComponentInChildren<MeshRenderer>().enabled = false;
+        bigShield.GetComponentInChildren<MeshRenderer>().enabled = false;
+
+        shieldOn = false;
+    }
+
+    public void FlashShield()
+    {
+        shieldFlashTimer -= Time.deltaTime;
+        if (shieldFlashTimer <= 0.0f)
+        {
+            if (shieldOn)
+            {
+                TurnOffShield();
+            }
+            else
+            {
+                TurnOnShield();
+            }
+            shieldFlashTimer = 0.1f;
+        }
+
+    }
+    public void SetUpFlash()
+    {
+        shieldFlashTimer = 0.1f;
+    }
 }

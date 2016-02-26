@@ -12,6 +12,8 @@ TagManager:
   - Blockade
   - Score
   - Collectable
+  - Multiplier
+  - Shield
   layers:
   - Default
   - TransparentFX

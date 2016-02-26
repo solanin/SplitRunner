@@ -12,8 +12,13 @@ public class GameManager : MonoBehaviour {
     private Player player;
     private ObstacleManager OM;
     private GameObject scoreText;
+    private GameObject shieldText;
+    private GameObject multiplierText;
     private float score;
-
+    private bool doubleScore = false;
+    private bool shield = false;
+    public float shieldTimer = 0.0f;
+    public float multiplierTimer = 0.0f;
 
     // s_Instance is used to cache the instance found in the scene so we don't have to look it up every time.
     private static GameManager s_Instance = null;
@@ -51,6 +56,8 @@ public class GameManager : MonoBehaviour {
         OM.gm = this;
         scoreText = GameObject.FindGameObjectWithTag("Score");
         score = 0;
+        shieldText = GameObject.Find("ShieldTimer");
+        multiplierText = GameObject.Find("MultiplierTimer");
     }
 
     // Update is called once per frame
@@ -65,9 +72,52 @@ public class GameManager : MonoBehaviour {
             if (Input.GetKeyUp(KeyCode.Space))
                 player.toggleSplit();
 
-            score += Time.deltaTime;
+            //score += Time.deltaTime;
             scoreText.GetComponentInChildren<TextMesh>().text = "Score: " + score.ToString("0.##");
 
+            if (shield)
+            {
+                shieldTimer -= Time.deltaTime;
+
+                if (shieldTimer <= 1.5f)
+                {
+                    player.FlashShield();
+                }
+
+                if (shieldTimer <= 0)
+                {
+                    shieldText.GetComponentInChildren<TextMesh>().text = "Shield: Off";
+                    shield = false;
+                    player.TurnOffShield();
+                }
+                else
+                {
+                    shieldText.GetComponentInChildren<TextMesh>().text = "Shield: " + shieldTimer.ToString("0.##");
+                }
+            }
+            else
+            {
+                shieldText.GetComponentInChildren<TextMesh>().text = "Shield: Off";
+            }
+
+            if (doubleScore)
+            {
+                multiplierTimer -= Time.deltaTime;
+
+                if (multiplierTimer <= 0)
+                {
+                    multiplierText.GetComponentInChildren<TextMesh>().text = "Multiplier: Off";
+                    doubleScore = false;
+                }
+                else
+                {
+                    multiplierText.GetComponentInChildren<TextMesh>().text = "Multiplier: " + multiplierTimer.ToString("0.##");
+                }
+            }
+            else
+            {
+                multiplierText.GetComponentInChildren<TextMesh>().text = "Multiplier: Off";
+            }
         }
 
         if (GameOver) {
@@ -114,5 +164,22 @@ public class GameManager : MonoBehaviour {
     public void addScore()
     {
         score++;
+        if (doubleScore)
+        {
+            score++;
+        }
     }
+    public void activateShield()
+    {
+        shield = true;
+        shieldTimer = 5.0f;
+        player.TurnOnShield();
+        player.SetUpFlash();
+    }
+    public void activateMultiplier()
+    {
+        doubleScore = true;
+        multiplierTimer = 5.0f;
+    }
+    public bool Shield() { return shield; }
 }

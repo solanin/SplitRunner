@@ -8,7 +8,6 @@ public class ObstacleManager : MonoBehaviour
     public GameManager gm;
     public List<GameObject> ActiveBlockades = new List<GameObject>(0); // Holds All Active Objects on Screen
     public int objectCount = 0; // Current Object on Screen Count
-    //public Dictionary<object, bool[]> emptySpaces = new Dictionary<object, bool[]>(); //dictionary holding the spaces
 
     //2d array to hold the positions
     public bool[,] emptySpaces = new bool[21, 5] { { true, false, true, false, false } ,
@@ -34,6 +33,8 @@ public class ObstacleManager : MonoBehaviour
             { true, false, false, false, false }
         };
     public GameObject collectablePrefab = null;
+    public GameObject doubleScorePrefab = null;
+    public GameObject shieldPrefab = null;
     private float[] lanePositions = new float[5] { -3.0f, -1.5f, 0.0f, 1.5f, 3.0f };
 
     // Use this for initialization
@@ -84,9 +85,8 @@ public class ObstacleManager : MonoBehaviour
             GameObject.Instantiate((UnityEngine.Object)Obstacles[x]);
 
             //Generating collectables
-            int obstacle = Random.Range(0, 5);
-            obstacle = 1;
-            if (obstacle == 1)
+            int obstacle = Random.Range(0, 7);
+            if (obstacle < 5)
             {
                 List<int> emptySpace = new List<int>();
                 for (int j = 0; j < 5; j++)
@@ -107,35 +107,51 @@ public class ObstacleManager : MonoBehaviour
                     Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
                 }
             }
+            else if (obstacle == 5)//shield
+            {
+                List<int> emptySpace = new List<int>();
+                for (int j = 0; j < 5; j++)
+                {
+                    if (emptySpaces[x, j])
+                    {
+                        emptySpace.Add(j);
+                    }
+                }
+
+                if (emptySpace.Count == 2)
+                {
+                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[0]], start), Quaternion.identity);
+                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[1]], start), Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(shieldPrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
+                }
+            }
+            else //multiplier
+            {
+                List<int> emptySpace = new List<int>();
+                for (int j = 0; j < 5; j++)
+                {
+                    if (emptySpaces[x, j])
+                    {
+                        emptySpace.Add(j);
+                    }
+                }
+
+                if (emptySpace.Count == 2)
+                {
+                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[0]], start), Quaternion.identity);
+                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[1]], start), Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(doubleScorePrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
+                }
+            }
 
             start += dist; //append to start so that nlocks are spaced
         }
     }
-
-    //void createDictionary()
-    //{
-    //    //emptySpaces.Add(Obstacles[0], new bool[5] { true, false, true, false, false });
-    //    //emptySpaces.Add(Obstacles[1], new bool[5] { true, true, false, true, true });
-    //    //emptySpaces.Add(Obstacles[2], new bool[5] { true, false, true, true, true });
-    //    //emptySpaces.Add(Obstacles[3], new bool[5] { true, true, true, false, true });
-    //    //emptySpaces.Add(Obstacles[4], new bool[5] { false, true, false, false, false });
-    //    //emptySpaces.Add(Obstacles[5], new bool[5] { false, true, false, true, false });
-    //    //emptySpaces.Add(Obstacles[6], new bool[5] { false, true, true, true, false });
-    //    //emptySpaces.Add(Obstacles[7], new bool[5] { false, true, false, true, true });
-    //    //emptySpaces.Add(Obstacles[8], new bool[5] { true, true, false, true, false });
-    //    //emptySpaces.Add(Obstacles[9], new bool[5] { true, true, false, true, true });
-    //    //emptySpaces.Add(Obstacles[10], new bool[5] { true, false, true, true, true });
-    //    //emptySpaces.Add(Obstacles[11], new bool[5] { true, true, true, false, true });
-    //    //emptySpaces.Add(Obstacles[12], new bool[5] { false, true, false, true, false });
-    //    //emptySpaces.Add(Obstacles[13], new bool[5] { false, true, true, true, false });
-    //    //emptySpaces.Add(Obstacles[14], new bool[5] { false, true, false, true, true });
-    //    //emptySpaces.Add(Obstacles[15], new bool[5] { true, true, false, true, false });
-    //    //emptySpaces.Add(Obstacles[16], new bool[5] { false, false, true, false, false });
-    //    //emptySpaces.Add(Obstacles[17], new bool[5] { false, false, true, false, true });
-    //    //emptySpaces.Add(Obstacles[18], new bool[5] { false, false, false, true, false });
-    //    //emptySpaces.Add(Obstacles[19], new bool[5] { false, false, false, false, true });
-    //    //emptySpaces.Add(Obstacles[20], new bool[5] { true, false, false, false, false });
-
-        
-    //}
+    
 }
