@@ -8,22 +8,18 @@ public class Obstacle : MonoBehaviour {
 
 	private GameManager gm;
 
-	// Use this for initialization
-	void Start () {
-		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
-        if (gm.GetTime() > 200)
+    // Use this for initialization
+    void Start()
+    {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        float time = gm.GetTime();
+        speed = time * .00125f;
+        if (speed < 0.05f)
         {
-            speed = .4f;
-        }
-        else if (gm.GetTime() > 150)
+            speed = 0.05f;
+        } else if (speed > 0.17f)
         {
-            speed = .3f;
-        } else if (gm.GetTime() > 100)
-        {
-            speed = .2f;
-        } else if (gm.GetTime() > 50)
-        {
-            speed = .1f;
+            speed = 0.17f;
         }
     }
 	

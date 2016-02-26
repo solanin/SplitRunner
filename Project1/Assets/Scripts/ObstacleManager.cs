@@ -45,7 +45,7 @@ public class ObstacleManager : MonoBehaviour
         Obstacles = Resources.LoadAll("Obstacles"); // Loads all prefabs in obstacle folder to this array
         level = 0;
         levelText = GameObject.FindWithTag("Level");
-        GenerateObstacles(4.0f, 5, .02f, 12.0f);// Start initial generation
+        GenerateObstacles(8.0f, 10, 12.0f);// Start initial generation
         
     }
 
@@ -58,13 +58,13 @@ public class ObstacleManager : MonoBehaviour
             if (gm)
             {
                 float time = gm.GetTime();
-                GenerateObstacles(8.0f, 5, time*.05f, 10.0f);
+                GenerateObstacles(8.0f, 10, 12.0f);
             }
         }
     }
 
     //TODO: Create function for block creation
-    void GenerateObstacles(float dist, int numObjects, float speed, float start) // For now only going three random numbers deep
+    void GenerateObstacles(float dist, int numObjects, float start) // For now only going three random numbers deep
     {
         level++;
         levelText.GetComponent<TextMesh>().text = "Level " + level;
