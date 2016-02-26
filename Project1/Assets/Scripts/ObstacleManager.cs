@@ -52,16 +52,16 @@ public class ObstacleManager : MonoBehaviour
         {
             if (gm)
             {
-                float score = gm.GetScore();
-                if (score > 150)
+                float time = gm.GetTime();
+                if (time > 150)
                 {
                     GenerateObstacles(10.0f, 40, .5f, 96.0f);
                 }
-                else if (score > 100)
+                else if (time > 100)
                 {
                     GenerateObstacles(8.0f, 30, .3f, 48.0f);
                 }
-                else if (score > 50)
+                else if (time > 50)
                 {
                     GenerateObstacles(6.0f, 20, .15f, 24.0f);
                 }

@@ -11,17 +11,17 @@ public class Obstacle : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
-        if (gm.GetScore() > 200)
+        if (gm.GetTime() > 200)
         {
             speed = .4f;
         }
-        else if (gm.GetScore() > 150)
+        else if (gm.GetTime() > 150)
         {
             speed = .3f;
-        } else if (gm.GetScore() > 100)
+        } else if (gm.GetTime() > 100)
         {
             speed = .2f;
-        } else if (gm.GetScore() > 50)
+        } else if (gm.GetTime() > 50)
         {
             speed = .1f;
         }

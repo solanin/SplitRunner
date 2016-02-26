@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     private bool shield = false;
     public float shieldTimer = 0.0f;
     public float multiplierTimer = 0.0f;
+    private float timer;
 
     // s_Instance is used to cache the instance found in the scene so we don't have to look it up every time.
     private static GameManager s_Instance = null;
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour {
         score = 0;
         shieldText = GameObject.Find("ShieldTimer");
         multiplierText = GameObject.Find("MultiplierTimer");
+        timer = 0.0f;
     }
 
     // Update is called once per frame
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour {
             if (Input.GetKeyUp(KeyCode.Space))
                 player.toggleSplit();
 
-            //score += Time.deltaTime;
+            timer += Time.deltaTime;
             scoreText.GetComponentInChildren<TextMesh>().text = "Score: " + score.ToString("0.##");
 
             if (shield)
@@ -160,6 +162,11 @@ public class GameManager : MonoBehaviour {
     public float GetScore()
     {
         return score;
+    }
+
+    public float GetTime()
+    {
+        return timer;
     }
     public void addScore()
     {
