@@ -26,8 +26,17 @@ public class Obstacle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!gm.IsPaused) {
-			// Move Down
-			float newy = transform.position.y - speed;
+            // Move Down
+            float newy;
+            if(gm.Slow())
+            {
+                newy = transform.position.y - (speed/1.5f);
+            }
+            else
+            {
+
+                newy = transform.position.y - speed;
+            }
 			transform.position = new Vector3 (transform.position.x, newy, transform.position.z);
 		}
         if (transform.position.y < -6.0f)

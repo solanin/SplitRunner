@@ -15,6 +15,7 @@ TagManager:
   - Multiplier
   - Shield
   - Level
+  - Slow
   layers:
   - Default
   - TransparentFX

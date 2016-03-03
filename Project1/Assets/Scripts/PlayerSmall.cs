@@ -14,8 +14,17 @@ public class PlayerSmall : MonoBehaviour {
 	void OnTriggerEnter (Collider col) {
 		if (player.isSplit()) {
 			Debug.Log ("PlayerSmall hit something");
-			if (col.gameObject.tag == "Obstacle" && !gm.Shield()) {
-				gm.EndGame ();
+			if (col.gameObject.tag == "Obstacle") {
+
+                if (gm.Shield())
+                {
+                    Destroy(col.gameObject);
+                    gm.DeactivateShield();
+                }
+                else
+                {
+                    gm.EndGame();
+                }
 			}
             else if (col.gameObject.tag == "Collectable")
             {
@@ -30,6 +39,11 @@ public class PlayerSmall : MonoBehaviour {
             else if (col.gameObject.tag == "Shield")
             {
                 gm.activateShield();
+                Destroy(col.gameObject);
+            }
+            else if (col.gameObject.tag == "Slow")
+            {
+                gm.ActivateSlow();
                 Destroy(col.gameObject);
             }
         }

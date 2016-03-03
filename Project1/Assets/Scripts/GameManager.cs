@@ -12,13 +12,13 @@ public class GameManager : MonoBehaviour {
     private Player player;
     private ObstacleManager OM;
     private GameObject scoreText;
-    private GameObject shieldText;
-    private GameObject multiplierText;
     private float score;
     private bool doubleScore = false;
     private bool shield = false;
+    private bool slow = false;
     public float shieldTimer = 0.0f;
     public float multiplierTimer = 0.0f;
+    public float slowTimer = 0.0f;
     private float timer;
 
     // s_Instance is used to cache the instance found in the scene so we don't have to look it up every time.
@@ -57,8 +57,6 @@ public class GameManager : MonoBehaviour {
         OM.gm = this;
         scoreText = GameObject.FindGameObjectWithTag("Score");
         score = 0;
-        shieldText = GameObject.Find("ShieldTimer");
-        multiplierText = GameObject.Find("MultiplierTimer");
         timer = 0.0f;
     }
 
@@ -88,18 +86,9 @@ public class GameManager : MonoBehaviour {
 
                 if (shieldTimer <= 0)
                 {
-                    shieldText.GetComponentInChildren<TextMesh>().text = "Shield: Off";
                     shield = false;
                     player.TurnOffShield();
                 }
-                else
-                {
-                    shieldText.GetComponentInChildren<TextMesh>().text = "Shield: " + shieldTimer.ToString("0.##");
-                }
-            }
-            else
-            {
-                shieldText.GetComponentInChildren<TextMesh>().text = "Shield: Off";
             }
 
             if (doubleScore)
@@ -108,17 +97,18 @@ public class GameManager : MonoBehaviour {
 
                 if (multiplierTimer <= 0)
                 {
-                    multiplierText.GetComponentInChildren<TextMesh>().text = "Multiplier: Off";
                     doubleScore = false;
                 }
-                else
-                {
-                    multiplierText.GetComponentInChildren<TextMesh>().text = "Multiplier: " + multiplierTimer.ToString("0.##");
-                }
             }
-            else
+
+            if (slow)
             {
-                multiplierText.GetComponentInChildren<TextMesh>().text = "Multiplier: Off";
+                slowTimer -= Time.deltaTime;
+
+                if (slowTimer <= 0)
+                {
+                    slow = false;
+                }
             }
         }
 
@@ -189,4 +179,16 @@ public class GameManager : MonoBehaviour {
         multiplierTimer = 5.0f;
     }
     public bool Shield() { return shield; }
+
+    public void ActivateSlow()
+    {
+        slow = true;
+        slowTimer = 5.0f;
+    }
+    public bool Slow() { return slow; }
+
+    public void DeactivateShield()
+    {
+        shieldTimer = 0.05f;
+    }
 }

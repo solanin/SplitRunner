@@ -37,6 +37,7 @@ public class ObstacleManager : MonoBehaviour
     public GameObject collectablePrefab = null;
     public GameObject doubleScorePrefab = null;
     public GameObject shieldPrefab = null;
+    public GameObject slowPrefab = null;
     private float[] lanePositions = new float[5] { -3.0f, -1.5f, 0.0f, 1.5f, 3.0f };
 
     // Use this for initialization
@@ -70,6 +71,11 @@ public class ObstacleManager : MonoBehaviour
         levelText.GetComponent<TextMesh>().text = "Level " + level;
         StopAllCoroutines();
         StartCoroutine(fadeText(3.0f));
+
+        bool multiplier = false;
+        bool shield = false;
+        bool slow = false;
+
         for (int i = 0; i < numObjects; i++) // Go through and make objects
         {
 
@@ -79,7 +85,7 @@ public class ObstacleManager : MonoBehaviour
             GameObject.Instantiate((UnityEngine.Object)Obstacles[x]);
 
             //Generating collectables
-            int obstacle = Random.Range(0, 7);
+            int obstacle = Random.Range(0, 8);
             if (obstacle < 5)
             {
                 List<int> emptySpace = new List<int>();
@@ -111,18 +117,40 @@ public class ObstacleManager : MonoBehaviour
                         emptySpace.Add(j);
                     }
                 }
-
-                if (emptySpace.Count == 2)
+                
+                //limit to only one shield per level
+                if (shield)
                 {
-                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[0]], start), Quaternion.identity);
-                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[1]], start), Quaternion.identity);
+                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
                 }
                 else
                 {
                     Instantiate(shieldPrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
+                    shield = true;
                 }
             }
-            else //multiplier
+            else if (obstacle == 6)//multiplier
+            {
+                List<int> emptySpace = new List<int>();
+                for (int j = 0; j < 5; j++)
+                {
+                    if (emptySpaces[x, j])
+                    {
+                        emptySpace.Add(j);
+                    }
+                }
+                
+                if (multiplier)
+                {
+                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(doubleScorePrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
+                    multiplier = true;
+                }
+            }
+            else //slow
             {
                 List<int> emptySpace = new List<int>();
                 for (int j = 0; j < 5; j++)
@@ -133,14 +161,14 @@ public class ObstacleManager : MonoBehaviour
                     }
                 }
 
-                if (emptySpace.Count == 2)
+                if (slow)
                 {
-                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[0]], start), Quaternion.identity);
-                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[1]], start), Quaternion.identity);
+                    Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
                 }
                 else
                 {
-                    Instantiate(doubleScorePrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
+                    Instantiate(slowPrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
+                    slow = true;
                 }
             }
 
