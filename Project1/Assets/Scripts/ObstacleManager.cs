@@ -161,7 +161,7 @@ public class ObstacleManager : MonoBehaviour
                     }
                 }
 
-                if (slow)
+                if (slow || level < 3) //dont show before level 3
                 {
                     Instantiate(collectablePrefab, new Vector3(lanePositions[emptySpace[Random.Range(0, emptySpace.Count)]], start), Quaternion.identity);
                 }

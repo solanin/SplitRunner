@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour {
     private Player player;
     private ObstacleManager OM;
     private GameObject scoreText;
+    private GameObject shieldIcon;
+    private GameObject multiplierIcon;
+    private GameObject slowIcon;
     private float score;
     private bool doubleScore = false;
     private bool shield = false;
@@ -56,6 +59,14 @@ public class GameManager : MonoBehaviour {
         OM = new ObstacleManager();
         OM.gm = this;
         scoreText = GameObject.FindGameObjectWithTag("Score");
+        shieldIcon = GameObject.Find("ShieldIcon");
+        multiplierIcon = GameObject.Find("MultiplierIcon");
+        slowIcon = GameObject.Find("SlowIcon");
+
+        shieldIcon.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        multiplierIcon.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        slowIcon.GetComponentInChildren<SpriteRenderer>().enabled = false;
+
         score = 0;
         timer = 0.0f;
     }
@@ -88,6 +99,7 @@ public class GameManager : MonoBehaviour {
                 {
                     shield = false;
                     player.TurnOffShield();
+                    shieldIcon.GetComponentInChildren<SpriteRenderer>().enabled = false;
                 }
             }
 
@@ -98,6 +110,7 @@ public class GameManager : MonoBehaviour {
                 if (multiplierTimer <= 0)
                 {
                     doubleScore = false;
+                    multiplierIcon.GetComponentInChildren<SpriteRenderer>().enabled = false;
                 }
             }
 
@@ -108,6 +121,7 @@ public class GameManager : MonoBehaviour {
                 if (slowTimer <= 0)
                 {
                     slow = false;
+                    slowIcon.GetComponentInChildren<SpriteRenderer>().enabled = false;
                 }
             }
         }
@@ -172,11 +186,13 @@ public class GameManager : MonoBehaviour {
         shieldTimer = 5.0f;
         player.TurnOnShield();
         player.SetUpFlash();
+        shieldIcon.GetComponentInChildren<SpriteRenderer>().enabled = true;
     }
     public void activateMultiplier()
     {
         doubleScore = true;
         multiplierTimer = 5.0f;
+        multiplierIcon.GetComponentInChildren<SpriteRenderer>().enabled = true;
     }
     public bool Shield() { return shield; }
 
@@ -184,6 +200,7 @@ public class GameManager : MonoBehaviour {
     {
         slow = true;
         slowTimer = 5.0f;
+        slowIcon.GetComponentInChildren<SpriteRenderer>().enabled = true;
     }
     public bool Slow() { return slow; }
 
