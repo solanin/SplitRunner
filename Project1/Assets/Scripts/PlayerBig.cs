@@ -15,7 +15,7 @@ public class PlayerBig : MonoBehaviour {
     {
         if (!player.isSplit())
         {
-            Debug.Log("PlayerBig hit something");
+            //Debug.Log("PlayerBig hit something");
             if (col.gameObject.tag == "Obstacle")
             {
                 if (gm.Shield())

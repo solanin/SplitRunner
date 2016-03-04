@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Xml;
+using System.IO;
+using System;
 
 public class GameManager : MonoBehaviour {
 
@@ -135,19 +138,54 @@ public class GameManager : MonoBehaviour {
     /// Pause the game.
     /// </summary>
     public void Pause() {
-        isPaused = true;
-        GameObject.Find("btnPause").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("btnPlay");
+		isPaused = true;
+		GameObject.Find ("btnPause").GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("btnPlay");
 
-        GameObject.Find("Paused").GetComponent<Renderer>().enabled = true;
-        GameObject.Find("Menu").GetComponent<Renderer>().enabled = true;
+		GameObject.Find ("Paused").GetComponent<Renderer> ().enabled = true;
+		GameObject.Find ("Menu").GetComponent<Renderer> ().enabled = true;
+		GameObject.Find ("btnBack").GetComponent<SpriteRenderer> ().enabled = true;
+		GameObject.Find ("btnBack").GetComponent<BoxCollider2D> ().enabled = true;
 
-        if (GameOver) {
-            GameObject.Find("btnPause").GetComponent<SpriteRenderer>().enabled = false;
-            GameObject.Find("btnReplay").GetComponent<SpriteRenderer>().enabled = true;
-            GameObject.Find("btnReplay").GetComponent<BoxCollider2D>().enabled = true;
-            GameObject.Find("Paused").GetComponent<TextMesh>().text = "Game\nOver";
-        }
-    }
+		if (GameOver) {
+			GameObject.Find ("btnPause").GetComponent<SpriteRenderer> ().enabled = false;
+			GameObject.Find ("btnReplay").GetComponent<SpriteRenderer> ().enabled = true;
+			GameObject.Find ("btnReplay").GetComponent<BoxCollider2D> ().enabled = true;
+			GameObject.Find ("Paused").GetComponent<TextMesh> ().text = "Game\nOver";
+
+			// Load current scores
+			float[] highscore = new float[HighScoreManager.AMT_SAVED];
+			for (int i=0; i < highscore.Length; i++) {
+				highscore [i] = PlayerPrefs.GetFloat ("Score " + i);
+			}
+
+			bool gotHighScore = false;
+			for (int i=0; i < highscore.Length; i++) {
+				if (score > highscore [i] && !gotHighScore) {
+					insertHighScore (highscore, i);
+					gotHighScore = true;
+				}
+			}
+
+			// did you reach a highscore?
+			if (gotHighScore) {
+				//Save New
+				for (int i=0; i < HighScoreManager.AMT_SAVED; i++) {
+					PlayerPrefs.SetFloat("Score " + i, highscore [i]);
+				}
+				PlayerPrefs.Save ();
+				Debug.Log("SAVE");
+			}
+		}
+	}
+
+	public void insertHighScore (float[] highscore, int insertAt) {
+		for (int i=highscore.Length; i < insertAt; i--) {
+			highscore[i] = highscore[i-1];
+			Debug.Log(i +" is replaced by " + (i-1));
+		}
+		Debug.Log(insertAt +" is replaced by " + score);
+		highscore[insertAt] = score;
+	}
 
     /// <summary>
     /// Plays the game.
@@ -157,7 +195,9 @@ public class GameManager : MonoBehaviour {
         GameObject.Find("btnPause").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("btnPause");
 
         GameObject.Find("Paused").GetComponent<Renderer>().enabled = false;
-        GameObject.Find("Menu").GetComponent<Renderer>().enabled = false;
+		GameObject.Find("Menu").GetComponent<Renderer>().enabled = false;
+		GameObject.Find ("btnBack").GetComponent<SpriteRenderer> ().enabled = false;
+		GameObject.Find ("btnBack").GetComponent<BoxCollider2D> ().enabled = false;
     }
 
     ///<summary>

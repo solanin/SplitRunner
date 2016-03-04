@@ -13,7 +13,7 @@ public class PlayerSmall : MonoBehaviour {
 	
 	void OnTriggerEnter (Collider col) {
 		if (player.isSplit()) {
-			Debug.Log ("PlayerSmall hit something");
+			//Debug.Log ("PlayerSmall hit something");
 			if (col.gameObject.tag == "Obstacle") {
 
                 if (gm.Shield())
