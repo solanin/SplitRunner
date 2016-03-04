@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour {
             }
         }
 
-        if (GameOver) {
+        if (GameOver && !isPaused) {
             Pause();
         }
     }
@@ -159,15 +159,20 @@ public class GameManager : MonoBehaviour {
 			}
 
 			bool gotHighScore = false;
+			int atLoc = highscore.Length;
 			for (int i=0; i < highscore.Length; i++) {
 				if (score > highscore [i] && !gotHighScore) {
-					insertHighScore (highscore, i);
 					gotHighScore = true;
+					atLoc = i;
 				}
 			}
 
 			// did you reach a highscore?
-			if (gotHighScore) {
+			if (gotHighScore && (atLoc < highscore.Length)) {
+				insertHighScore (highscore, atLoc);
+				
+				GameObject.Find ("Paused").GetComponent<TextMesh> ().text = "High\nScore";
+
 				//Save New
 				for (int i=0; i < HighScoreManager.AMT_SAVED; i++) {
 					PlayerPrefs.SetFloat("Score " + i, highscore [i]);
@@ -183,7 +188,6 @@ public class GameManager : MonoBehaviour {
 			highscore[i] = highscore[i-1];
 			Debug.Log(i +" is replaced by " + (i-1));
 		}
-		Debug.Log(insertAt +" is replaced by " + score);
 		highscore[insertAt] = score;
 	}
 
