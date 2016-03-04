@@ -12,7 +12,8 @@ public class ObstacleManager : MonoBehaviour
     public int objectCount = 0; // Current Object on Screen Count
 
     //2d array to hold the positions
-    public bool[,] emptySpaces = new bool[21, 5] { { true, false, true, false, false } ,
+    public bool[,] emptySpaces = new bool[19, 5] { 
+            { true, false, true, false, false } ,
             { true, true, false, true, true } ,
             { true, false, true, true, true } ,
             { true, true, true, false, true },
@@ -26,8 +27,6 @@ public class ObstacleManager : MonoBehaviour
             { true, true, true, false, true },
             { false, true, false, true, false },
             { false, true, true, true, false },
-            { false, true, false, true, true },
-            { true, true, false, true, false },
             { false, false, true, false, false },
             { false, false, true, false, true },
             { false, false, false, true, false },
