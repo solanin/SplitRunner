@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     private bool isPaused;
     public bool IsPaused { get { return isPaused; } }
     private bool gameOver; // is it over?
+	private bool startedTap = false; //have we begun touching the screen
     public bool GameOver { get { return gameOver; } }
     public void EndGame() { gameOver = true; } // Creates the end state
     private Player player;
@@ -86,6 +87,35 @@ public class GameManager : MonoBehaviour {
             if (Input.GetKeyUp(KeyCode.Space))
                 player.toggleSplit();
 
+				
+			if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                startedTap = true;
+            }
+
+            if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && startedTap)
+            {
+                if (Input.GetTouch(0).deltaPosition.x < -5)
+                {
+                    player.MoveLeft();
+                    startedTap = false;
+                }
+                if (Input.GetTouch(0).deltaPosition.x > 5)
+                {
+                    player.MoveRight();
+                    startedTap = false;
+                }
+            }
+
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended && startedTap)
+            {
+                if (Input.GetTouch(0).deltaPosition.x > -5 && Input.GetTouch(0).deltaPosition.x < 5)
+                {
+                    player.toggleSplit();
+                    startedTap = false;
+                }
+            }
+			
             timer += Time.deltaTime;
             scoreText.GetComponentInChildren<TextMesh>().text = "Score: " + score.ToString("0.##");
 
