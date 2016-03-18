@@ -39,6 +39,13 @@ public class Player : MonoBehaviour
         {
             fireBullet();
         }
+
+		// Screen Wrap
+		if (transform.position.x > 50f) {
+			transform.position = new Vector3(-50f, 0f, 0f);
+		} else if (transform.position.x < -50f) {
+			transform.position = new Vector3(50f, 0f, 0f);	
+		} 
     }
 
     void fireBullet()
