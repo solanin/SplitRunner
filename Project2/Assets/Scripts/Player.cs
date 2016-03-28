@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-
+	GameObject bg;
     GameObject self;
     Rigidbody rigidBody;
     bool isJumping;
@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        self = GameObject.FindGameObjectWithTag("Player");
+		self = GameObject.FindGameObjectWithTag("Player");
+		bg = GameObject.Find("BG");
         rigidBody = self.GetComponent<Rigidbody>();
         direction = 1;
     }
@@ -41,11 +42,13 @@ public class Player : MonoBehaviour
         }
 
 		// Screen Wrap
-		if (transform.position.x > 50f) {
-			transform.position = new Vector3(-50f, 0f, 0f);
-		} else if (transform.position.x < -50f) {
-			transform.position = new Vector3(50f, 0f, 0f);	
-		} 
+		if (transform.position.x > (bg.transform.position.x + 50f)) {
+			bg.transform.position = new Vector3 (bg.transform.position.x + 100f, bg.transform.position.y, bg.transform.position.z);
+			transform.position = new Vector3 (transform.position.x, -0.49f, transform.position.z);
+		} else if (transform.position.x < (bg.transform.position.x - 50f)) {
+			bg.transform.position = new Vector3 (bg.transform.position.x - 100f, bg.transform.position.y, bg.transform.position.z);
+			transform.position = new Vector3 (transform.position.x, -0.49f, transform.position.z);
+		}
     }
 
     void fireBullet()
