@@ -8,4 +8,4 @@ We decided on something simple, a ball that can split up and move in unison. The
 
 Download the APK here: https://github.com/solanin/SplitRunner/blob/master/SplitRunnerAPK.apk
 
-Download the EXE here: https://github.com/solanin/SplitRunner/blob/master/SplitRunnerEXE.exe
+Download the EXE here: https://github.com/solanin/SplitRunner/tree/master/WindowsBuild
