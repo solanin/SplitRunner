@@ -1,6 +1,7 @@
 #Split Runner
 
 SmallTimeBeachBandits: Yanting Cheung & Jacob Westerback & Conner Westover
+Icons by  IconsMind (https://www.iconsmind.com) (http://www.iconarchive.com/show/outline-icons-by-iconsmind.html)
 
 ## The Game
 
