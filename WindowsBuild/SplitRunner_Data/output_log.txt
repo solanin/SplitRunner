@@ -1,0 +1,65 @@
+Initialize engine version: 5.2.3f1 (f3d16a1fa2dd)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 970 (ID=0x13c2)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  2.449 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: \\banner.main.ad.rit.edu\students\sjc5283\IGMProfile\Documents\SplitRunner\P1\WindowsBuild\SplitRunner_Data\Managed\System.dll (this message is harmless)
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 13f4 -> priority: 1 
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.307912 ms
+
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 358.
+Total: 0.133428 ms (FindLiveObjects: 0.017008 ms CreateObjectMapping: 0.012609 ms MarkObjects: 0.094719 ms  DeleteObjects: 0.008504 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.529608 ms
+
+Unloading 429 unused Assets to reduce memory usage. Loaded Objects now: 183.
+Total: 0.473305 ms (FindLiveObjects: 0.044867 ms CreateObjectMapping: 0.066274 ms MarkObjects: 0.123751 ms  DeleteObjects: 0.237532 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.309085 ms
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 222.
+Total: 0.189146 ms (FindLiveObjects: 0.026392 ms CreateObjectMapping: 0.020820 ms MarkObjects: 0.125804 ms  DeleteObjects: 0.014662 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.653067 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 183.
+Total: 0.183574 ms (FindLiveObjects: 0.025219 ms CreateObjectMapping: 0.019940 ms MarkObjects: 0.124631 ms  DeleteObjects: 0.012902 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.438701 ms
+
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 184.
+Total: 0.094426 ms (FindLiveObjects: 0.008210 ms CreateObjectMapping: 0.007917 ms MarkObjects: 0.070086 ms  DeleteObjects: 0.007624 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.569490 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 183.
+Total: 0.177416 ms (FindLiveObjects: 0.017888 ms CreateObjectMapping: 0.019940 ms MarkObjects: 0.125217 ms  DeleteObjects: 0.013782 ms)
+

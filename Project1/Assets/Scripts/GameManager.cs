@@ -90,7 +90,15 @@ public class GameManager : MonoBehaviour {
 				
 			if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                startedTap = true;
+				//Check you are not pausing
+				Transform pauseBtn = GameObject.Find("btnPause").transform;
+				if (!((Input.GetTouch(0).position.x < pauseBtn.position.x +.6) && 
+				      (Input.GetTouch(0).position.x > pauseBtn.position.x -.6) &&
+				      (Input.GetTouch(0).position.y < pauseBtn.position.y +.6) && 
+				      (Input.GetTouch(0).position.y > pauseBtn.position.y -.6)))
+				{
+					startedTap = true;
+				}
             }
 
             if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && startedTap)
