@@ -39,7 +39,7 @@ public class Obstacle : MonoBehaviour {
             }
 			transform.position = new Vector3 (transform.position.x, newy, transform.position.z);
 		}
-        if (transform.position.y < -6.0f)
+        if (transform.position.y < -7.0f)
         {
             Destroy(this.gameObject);   
         }
